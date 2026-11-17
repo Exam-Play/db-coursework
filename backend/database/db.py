@@ -1,0 +1,43 @@
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker, declarative_base
+
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(dotenv_path=BASE_DIR / ".env")
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL не найден. Проверь файл backend/database/.env")
+
+DATABASE_URL = DATABASE_URL.replace("postgresql+psycopg://", "postgresql+psycopg2://")
+DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://")
+
+DB_SCHEMA = os.environ.get("DB_SCHEMA")
+connect_args = {"options": f"-csearch_path={DB_SCHEMA}"} if DB_SCHEMA else {}
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    pool_recycle=300,
+    connect_args=connect_args,
+)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+Base = declarative_base()
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def check_connection() -> None:
+    with engine.connect() as connection:
+        result = connection.execute(text("SELECT version();"))
+        print("Подключение к БД успешно!")
+        print(result.fetchone())
