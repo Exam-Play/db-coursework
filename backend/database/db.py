@@ -15,14 +15,11 @@ if not DATABASE_URL:
 DATABASE_URL = DATABASE_URL.replace("postgresql+psycopg://", "postgresql+psycopg2://")
 DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://")
 
-DB_SCHEMA = os.environ.get("DB_SCHEMA")
-connect_args = {"options": f"-csearch_path={DB_SCHEMA}"} if DB_SCHEMA else {}
-
 engine = create_engine(
     DATABASE_URL,
     pool_pre_ping=True,
     pool_recycle=300,
-    connect_args=connect_args,
+    connect_args={},
 )
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 Base = declarative_base()

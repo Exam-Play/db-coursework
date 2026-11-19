@@ -1,0 +1,182 @@
+@use '../styles/index' as *;
+
+.tableWrapper {
+    @include card;
+    overflow-x: auto;
+    border-radius: $radius-lg;
+}
+
+.table {
+    @include table-base;
+}
+
+.tableHeader {
+    background-color: $color-bg-tertiary;
+}
+
+.tableHeaderCell {
+    padding: $space-3 $space-4;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    white-space: nowrap;
+    border-bottom: 2px solid $color-border-medium;
+    text-align: left;
+}
+
+.tableBodyRow {
+    transition: background-color $transition-fast;
+
+    &:hover {
+        background-color: $color-bg-primary;
+    }
+
+    &:last-child .tableCell {
+        border-bottom: none;
+    }
+}
+
+.tableCell {
+    padding: $space-3 $space-4;
+    border-bottom: 1px solid $color-border-light;
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+}
+
+.actionsCell {
+    white-space: nowrap;
+    width: 1%;
+}
+
+.actionBtn {
+    @include button-ghost;
+    padding: $space-1 $space-2;
+    font-size: $font-size-xs;
+    gap: $space-1;
+    border-radius: $radius-sm;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+        background-color: $color-bg-tertiary;
+    }
+
+    &.edit {
+        color: $color-primary;
+
+        &:hover:not(:disabled) {
+            background-color: $color-primary-light;
+            color: $color-primary-hover;
+        }
+    }
+
+    &.delete {
+        color: $color-danger;
+
+        &:hover:not(:disabled) {
+            background-color: $color-danger-light;
+            color: $color-danger-hover;
+        }
+    }
+}
+
+.actionBtnGroup {
+    display: inline-flex;
+    gap: $space-1;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4 $space-6;
+    border-bottom: 1px solid $color-border-light;
+    flex-wrap: wrap;
+    gap: $space-4;
+}
+
+.toolbarTitle {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+}
+
+.toolbarActions {
+    display: flex;
+    gap: $space-2;
+    flex-wrap: wrap;
+}
+
+.addBtn {
+    @include button-primary;
+}
+
+.exportBtn {
+    @include button-secondary;
+}
+
+.emptyState {
+    @include flex-col-center;
+    padding: $space-12 $space-6;
+    color: $color-text-secondary;
+    text-align: center;
+    gap: $space-4;
+}
+
+.emptyIcon {
+    width: 48px;
+    height: 48px;
+    color: $color-text-muted;
+    opacity: 0.5;
+}
+
+.emptyText {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+}
+
+.loadingWrapper {
+    @include flex-col-center;
+    padding: $space-12;
+    gap: $space-4;
+    color: $color-text-secondary;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid $color-border-light;
+    border-top-color: $color-primary;
+    border-radius: 50%;
+    @include animate-spin;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-2;
+    padding: $space-4 $space-6;
+    border-top: 1px solid $color-border-light;
+    flex-wrap: wrap;
+}
+
+.pageBtn {
+    @include button-ghost;
+    padding: $space-1 $space-3;
+    min-width: 36px;
+
+    &:hover:not(:disabled) {
+        background-color: $color-primary-light;
+        color: $color-primary;
+    }
+
+    &.active {
+        @include button-primary;
+    }
+}
+
+.pageInfo {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    padding: 0 $space-2;
+}

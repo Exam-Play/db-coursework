@@ -1,0 +1,72 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: $color-white;
+    padding: $space-6;
+    border-radius: $radius-lg;
+    width: 400px;
+    box-shadow: $shadow-lg;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-4;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $color-text-muted;
+}
+
+.fieldGroup {
+    margin-bottom: $space-4;
+}
+
+.label {
+    @include label-base;
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: $color-text-muted;
+    font-weight: normal;
+    margin-left: $space-1;
+}
+
+.input, .select {
+    @include input-base;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: $space-2;
+    margin-top: $space-6;
+}
+
+.submitBtn {
+    @include button-primary;
+}
+
+.cancelBtn {
+    @include button-secondary;
+}

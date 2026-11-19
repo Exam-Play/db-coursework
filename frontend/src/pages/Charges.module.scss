@@ -1,0 +1,17 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.container {
+    padding: $space-6;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $space-4;
+}
+
+.addBtn {
+    @include button-primary;
+}

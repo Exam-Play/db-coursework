@@ -1,0 +1,64 @@
+@use '../styles/index' as *;
+
+.loginContainer {
+    min-height: 100vh;
+    @include flex-center;
+    padding: $space-6;
+    background: linear-gradient(135deg, $color-primary-light 0%, $color-bg-primary 100%);
+}
+
+.loginCard {
+    @include card;
+    width: 100%;
+    max-width: 24rem;
+    padding: $space-8;
+    box-shadow: $shadow-xl;
+}
+
+.loginTitle {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $space-2;
+    text-align: center;
+}
+
+.loginSubtitle {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    text-align: center;
+    margin-bottom: $space-8;
+}
+
+.formGroup {
+    @include form-field;
+}
+
+.label {
+    @include label-base;
+}
+
+.input {
+    @include input-base;
+}
+
+.submitBtn {
+    @include button-primary;
+    width: 100%;
+    margin-top: $space-2;
+    padding: $space-3 $space-4;
+    font-size: $font-size-base;
+}
+
+.errorAlert {
+    padding: $space-3 $space-4;
+    margin-bottom: $space-4;
+    background-color: $color-danger-light;
+    border: 1px solid $color-danger;
+    border-radius: $radius-md;
+    color: $color-danger-text;
+    font-size: $font-size-sm;
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+}

@@ -1,0 +1,114 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    @include font-base;
+    background-color: $color-bg-primary;
+    color: $color-text-primary;
+    min-height: 100vh;
+    line-height: $line-height-normal;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $color-primary-hover;
+        text-decoration: underline;
+    }
+
+    &:focus-visible {
+        outline: none;
+        border-radius: $radius-sm;
+        box-shadow: 0 0 0 3px $color-primary-light;
+    }
+}
+
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+table {
+    border-collapse: collapse;
+}
+
+
+ul, ol {
+    list-style: none;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-tight;
+    color: $color-text-primary;
+}
+
+h1 { font-size: $font-size-3xl; }
+h2 { font-size: $font-size-2xl; }
+h3 { font-size: $font-size-xl; }
+h4 { font-size: $font-size-lg; }
+h5 { font-size: $font-size-base; }
+h6 { font-size: $font-size-sm; }
+
+
+::selection {
+    background-color: $color-primary-light;
+    color: $color-primary-text;
+}
+
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px $color-primary-light;
+    border-radius: $radius-sm;
+}

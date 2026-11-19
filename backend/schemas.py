@@ -1,92 +1,115 @@
-from datetime import date
-from decimal import Decimal
+﻿from pydantic import BaseModel
+from datetime import datetime, date
+from typing import Optional
 
-from pydantic import BaseModel, ConfigDict, Field
-
-
+# Auth
 class LoginRequest(BaseModel):
     username: str
     password: str
 
 class TokenResponse(BaseModel):
     access_token: str
-    token_type: str = "bearer"
     role: str
     username: str
 
-
-
-class WarehouseBase(BaseModel):
+# Warehouses
+class WarehouseCreate(BaseModel):
     name: str
-    quantity: int = Field(ge=0)
-    amount: Decimal = Field(ge=0)
+    quantity: int
+    amount: int
 
-class WarehouseCreate(WarehouseBase):
-    pass
+class WarehouseUpdate(BaseModel):
+    name: Optional[str] = None
+    quantity: Optional[int] = None
+    amount: Optional[int] = None
 
-class WarehouseUpdate(WarehouseBase):
-    pass
-
-class WarehouseOut(WarehouseBase):
-    model_config = ConfigDict(from_attributes=True)
+class WarehouseOut(BaseModel):
     id: int
+    name: str
+    quantity: int
+    amount: int
+    class Config: from_attributes = True
 
-
-
-
-class ExpenseItemBase(BaseModel):
+# ExpenseItems
+class ExpenseItemCreate(BaseModel):
     name: str
 
-class ExpenseItemCreate(ExpenseItemBase):
-    pass
+class ExpenseItemUpdate(BaseModel):
+    name: Optional[str] = None
 
-class ExpenseItemOut(ExpenseItemBase):
-    model_config = ConfigDict(from_attributes=True)
+class ExpenseItemOut(BaseModel):
     id: int
+    name: str
+    class Config: from_attributes = True
 
-
-
-
-class SaleBase(BaseModel):
+# Sales
+class SaleCreate(BaseModel):
     warehouse_id: int
-    sale_date: date
-    quantity: int = Field(gt=0)
-    amount: Decimal = Field(ge=0)
+    quantity: int
+    amount: int
+    sale_date: datetime
 
-class SaleCreate(SaleBase):
-    pass
+class SaleUpdate(BaseModel):
+    warehouse_id: Optional[int] = None
+    quantity: Optional[int] = None
+    amount: Optional[int] = None
+    sale_date: Optional[datetime] = None
 
-class SaleOut(SaleBase):
-    model_config = ConfigDict(from_attributes=True)
+class SaleOut(BaseModel):
     id: int
+    warehouse_id: int
+    warehouse_name: str
+    quantity: int
+    amount: int
+    sale_date: datetime
+    class Config: from_attributes = True
 
-
-
-
-class ChargeBase(BaseModel):
+# Charges
+class ChargeCreate(BaseModel):
     expense_item_id: int
-    charge_date: date
-    amount: Decimal = Field(ge=0)
+    amount: int
+    charge_date: datetime
 
-class ChargeCreate(ChargeBase):
-    pass
+class ChargeUpdate(BaseModel):
+    expense_item_id: Optional[int] = None
+    amount: Optional[int] = None
+    charge_date: Optional[datetime] = None
 
-class ChargeOut(ChargeBase):
-    model_config = ConfigDict(from_attributes=True)
+class ChargeOut(BaseModel):
     id: int
+    expense_item_id: int
+    expense_item_name: str
+    amount: int
+    charge_date: datetime
+    class Config: from_attributes = True
 
-
-
-
+# Reports
 class IncomeExpenseResponse(BaseModel):
-    income: Decimal
-    expense: Decimal
+    income: int
+    expense: int
 
 class ForecastResponse(BaseModel):
-    forecast_profit: Decimal
+    forecast_profit: float
 
-class ProductInfoResponse(BaseModel):
-    product_id: int
-    product_name: str
-    current_quantity: int
-    total_sales_amount: Decimal
+class TopProductResponse(BaseModel):
+    name: str
+    total_profit: float
+    class Config: from_attributes = True
+
+# Users
+class UserCreate(BaseModel):
+    username: str
+    password: str
+    role: str
+
+class UserUpdate(BaseModel):
+    username: Optional[str] = None
+    password: Optional[str] = None
+    role: Optional[str] = None
+
+class UserOut(BaseModel):
+    id: int
+    username: str
+    role: str
+    class Config:
+        from_attributes = True

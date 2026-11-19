@@ -1,0 +1,87 @@
+@use '../styles/index' as *;
+
+.navbar {
+    @include flex-between;
+    padding: $space-4 $space-6;
+    background-color: $color-bg-secondary;
+    border-bottom: 1px solid $color-border-light;
+    box-shadow: $shadow-sm;
+    position: sticky;
+    top: 0;
+    z-index: $z-sticky;
+    flex-wrap: wrap;
+    gap: $space-4;
+}
+
+.navSection {
+    @include flex-center;
+    gap: $space-3;
+    flex-wrap: wrap;
+
+    @include respond-to(md) {
+        justify-content: flex-start;
+    }
+}
+
+.navLabel {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.navLink {
+    @include font-base;
+    padding: $space-1 $space-3;
+    border-radius: $radius-md;
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    &:hover {
+        color: $color-primary;
+        background-color: $color-primary-light;
+        text-decoration: none;
+    }
+
+    &.active {
+        color: $color-primary;
+        background-color: $color-primary-light;
+    }
+}
+
+.navDivider {
+    width: 1px;
+    height: 1.5rem;
+    background-color: $color-border-medium;
+
+    @include respond-to(md) {
+        display: none;
+    }
+}
+
+.userActions {
+    @include flex-center;
+    gap: $space-3;
+    margin-left: auto;
+}
+
+.username {
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+}
+
+.logoutBtn {
+    @include button-ghost;
+    font-size: $font-size-sm;
+    padding: $space-1 $space-3;
+
+    &:hover:not(:disabled) {
+        background-color: $color-danger-light;
+        color: $color-danger;
+    }
+}
